@@ -74,7 +74,11 @@ class RGBOptionSchema(Schema):
         example="[256,256]",
         description="Pixel dimensions of the returned PNG image as JSON list.",
     )
-    gamma_factor = fields.Float(missing=None, description="Gamma factor to perform gamma correction.")
+    gamma_factor = fields.Float(
+        validate=validate.Range(min=0, min_inclusive=False),
+        missing=None,
+        description="Gamma factor to perform gamma correction."
+    )
 
     @pre_load
     def process_ranges(self, data: Mapping[str, Any], **kwargs: Any) -> Dict[str, Any]:
