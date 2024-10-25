@@ -105,6 +105,10 @@ def rgb(
                 )
 
             band_data = band_data_future.result()
+
+            if gamma_factor:
+                band_data = image.gamma_correction(band_data, gamma_factor)
+
             out_arrays.append(image.to_uint8(band_data, *band_stretch_range))
 
     out = np.ma.stack(out_arrays, axis=-1)
