@@ -71,6 +71,10 @@ def singleband(
             stretch_range_[1] = image.get_stretch_scale(stretch_max, percentiles)
 
         cmap_or_palette = cast(Optional[str], colormap)
+
+        if gamma_factor:
+            band_data = image.gamma_correction(band_data, gamma_factor)
+
         out = image.to_uint8(tile_data, *stretch_range_)
 
     return image.array_to_png(out, colormap=cmap_or_palette)

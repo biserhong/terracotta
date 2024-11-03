@@ -185,7 +185,9 @@ def gamma_correction(
         out_dtype: type = np.uint16,
 ) -> Array:
     """Apply gamma correction to the input array and scale it to the output dtype."""
-    arr = to_math_type(masked_data)
+    arr = masked_data
+    if np.issubdtype(masked_data.dtype, np.integer):
+        arr = to_math_type(masked_data)
     arr = gamma(arr, gamma_factor)
     arr = scale_dtype(arr, out_dtype)
     return arr
