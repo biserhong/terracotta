@@ -77,7 +77,7 @@ def singleband(
         cmap_or_palette = cast(Optional[str], colormap)
 
         if gamma_factor:
-            # gamma correction is monotonic and preserve percentiles
+            # gamma correction is monotonic and preserves percentiles
             band_stretch_range_arr = np.array(stretch_range_, dtype=tile_data.dtype)
             stretch_range_ = list(image.gamma_correction(band_stretch_range_arr, gamma_factor, band_range))
             # gamma correct band data

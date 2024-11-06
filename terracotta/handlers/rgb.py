@@ -108,7 +108,7 @@ def rgb(
             band_data = band_data_future.result()
 
             if gamma_factor:
-                # gamma correction is monotonic and preserve percentiles
+                # gamma correction is monotonic and preserves percentiles
                 band_stretch_range_arr = np.array(band_stretch_range, dtype=band_data.dtype)
                 band_stretch_range = list(image.gamma_correction(band_stretch_range_arr, gamma_factor, band_range))
                 # gamma correct band data
